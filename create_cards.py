@@ -2,9 +2,10 @@ import file_operations
 import faker
 import random
 import os
+from faker import Faker
 
 
-letters_mapping = {
+LETTERS_MAPPING = {
     'а': 'а͠',
     'б': 'б̋',
     'в': 'в͒͠',
@@ -73,7 +74,7 @@ letters_mapping = {
     'Я': 'Я̋',
     ' ': ' '
 }
-skills_list = [
+SKILLS_LIST = [
         'Стремительный прыжок',
         'Электрический выстрел',
         'Ледяной удар',
@@ -83,23 +84,17 @@ skills_list = [
         'Ледяной выстрел',
         'Огненный заряд'
 ]
-runic_skills = []
-
-
-os.makedirs('cards', mode=0o777, exist_ok=False)
-
-
-from faker import Faker
+RUNIC_SKILLS = []
 
 
 def main():
-    for i in range(len(skills_list)):
-        runic_skills.append(skills_list[i])
-        for s in range(len(list(letters_mapping.keys()))):
-            update_skill=runic_skills[i].replace(list(letters_mapping.keys())[s], list(letters_mapping.values())[s])
-            runic_skills[i]=update_skill
+    for i in range(len(SKILLS_LIST)):
+        RUNIC_SKILLS.append(SKILLS_LIST[i])
+        for s in range(len(list(LETTERS_MAPPING.keys()))):
+            update_skill=RUNIC_SKILLS[i].replace(list(LETTERS_MAPPING.keys())[s], list(LETTERS_MAPPING.values())[s])
+            RUNIC_SKILLS[i]=update_skill
     for number in range(10):
-        pers_skills = random.sample(runic_skills, 3)
+        pers_skills = random.sample(RUNIC_SKILLS, 3)
         fake = Faker("ru_RU")
         context = {
             'first_name': fake.first_name_male(),
@@ -115,6 +110,7 @@ def main():
             'skill_2': pers_skills[1],
             'skill_3': pers_skills[2]
         }
+        os.makedirs('cards', mode=0o777, exist_ok=False)
         file_operations.render_template('charsheet.svg', 'cards/processed_charsheet_{}.svg'.format(number), context)
 
 
