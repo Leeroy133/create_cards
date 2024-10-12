@@ -3,11 +3,6 @@ import faker
 import random
 import os
 
-from faker import Faker
-
-
-os.makedirs('cards', mode=0o777, exist_ok=False)
-
 
 letters_mapping = {
     'а': 'а͠',
@@ -91,18 +86,13 @@ skills_list = [
 runic_skills = []
 
 
+os.makedirs('cards', mode=0o777, exist_ok=False)
+
+
+from faker import Faker
+
+
 def main():
-    skills_list = [
-            'Стремительный прыжок',
-            'Электрический выстрел',
-            'Ледяной удар',
-            'Стремительный удар',
-            'Кислотный взгляд',
-            'Тайный побег',
-            'Ледяной выстрел',
-            'Огненный заряд'
-    ]
-    runic_skills = []
     for i in range(len(skills_list)):
         runic_skills.append(skills_list[i])
         for s in range(len(list(letters_mapping.keys()))):
