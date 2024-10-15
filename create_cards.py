@@ -82,19 +82,19 @@ SKILLS_LIST = [
         'Кислотный взгляд',
         'Тайный побег',
         'Ледяной выстрел',
-        'Огненный заряд'
+        'Огненный заряд',
 ]
-RUNIC_SKILLS = []
 
 
 def main():
+    runic_skills = []
     for i in range(len(SKILLS_LIST)):
-        RUNIC_SKILLS.append(SKILLS_LIST[i])
+        runic_skills.append(SKILLS_LIST[i])
         for s in range(len(list(LETTERS_MAPPING.keys()))):
-            update_skill=RUNIC_SKILLS[i].replace(list(LETTERS_MAPPING.keys())[s], list(LETTERS_MAPPING.values())[s])
-            RUNIC_SKILLS[i]=update_skill
+            update_skill=runic_skills[i].replace(list(LETTERS_MAPPING.keys())[s], list(LETTERS_MAPPING.values())[s])
+            runic_skills[i]=update_skill
     for number in range(10):
-        pers_skills = random.sample(RUNIC_SKILLS, 3)
+        pers_skills = random.sample(runic_skills, 3)
         fake = Faker("ru_RU")
         context = {
             'first_name': fake.first_name_male(),
